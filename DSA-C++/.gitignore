@@ -1,0 +1,23 @@
+# VS Code
+.vscode/
+
+# Compiled output
+*.exe
+*.out
+*.o
+*.obj
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dependencies
+*.a
+*.so
+*.dylib
