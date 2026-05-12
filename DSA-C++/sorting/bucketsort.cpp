@@ -1,44 +1,45 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
 using namespace std;
 
-void bucketSort(float arr[],int n){
+void bucketSort(float arr[], int n) {
     vector<float> buckets[n];
-    for(int i=0;i<n;i++){
-        int bucket_index = n*arr[i];
-        buckets[bucket_index].push_back(arr[i]);
+
+    for (int i = 0; i < n; i++) {
+        int bucketIndex = n * arr[i];
+        buckets[bucketIndex].push_back(arr[i]);
     }
-    for(int i=0;i<n;i++){
-        sort(buckets[i].begin(),buckets[i].end());
+
+    for (int i = 0; i < n; i++) {
+        sort(buckets[i].begin(), buckets[i].end());
     }
+
     int index = 0;
-    for(int i=0;i<n;i++){
-        for(float val: buckets[i]){
-            arr[index++] = val;
+    for (int i = 0; i < n; i++) {
+        for (size_t j = 0; j < buckets[i].size(); j++) {
+            arr[index++] = buckets[i][j];
         }
     }
 }
 
-int main(){
-    int n;
-    cout<<"Enter the number of elements: ";
-    cin>>n;
-    float arr[n];
-    cout<<"Enter the elements (between 0 and 1): ";
-    for(int i=0;i<n;i++){
-        cin>>arr[i];
-    }
-    cout<<"Original array: ";
-    for(int i=0;i<n;i++){
-        cout<<arr[i]<<" ";
-    }
-    cout<<endl;
-    bucketSort(arr,n);
-    cout<<"Sorted array: ";
-    for(int i=0;i<n;i++){
-        cout<<arr[i]<<" ";
-    }
-    cout<<endl;
-    return 0;   
+void printArray(float arr[], int n) {
+    for (int i = 0; i < n; i++) cout << arr[i] << " ";
+    cout << endl;
+}
+
+int main() {
+    float arr[] = {0.897, 0.565, 0.656, 0.1234, 0.665, 0.3434};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    cout << "Original array: ";
+    printArray(arr, n);
+
+    bucketSort(arr, n);
+
+    cout << "Sorted array: ";
+    printArray(arr, n);
+
+    return 0;
 }
