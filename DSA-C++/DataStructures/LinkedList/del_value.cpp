@@ -51,6 +51,23 @@ class LinkedList{
             cout << "Updated List: ";
             display();
         }
+        void delete_end(){
+            if(!head) return;
+            if(!head->next){
+                delete head;
+                head = nullptr;
+                return;
+            }
+            Node* temp = head;
+            Node* prev = nullptr;
+            while(temp->next != nullptr){
+                prev = temp;
+                temp = temp->next;
+            }
+            prev->next = nullptr;
+            delete temp;
+
+        }
 
         void display(){
             Node* temp = head;
@@ -79,7 +96,7 @@ int main(){
 
     list.delete_from_beginning();
     list.delete_from_beginning();
-    list.delete_from_beginning();
-
+    list.delete_end();
+    list.display();
     return 0;
 }

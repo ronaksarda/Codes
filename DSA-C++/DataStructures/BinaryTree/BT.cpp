@@ -23,6 +23,22 @@ public:
             else q.push(temp->right);
         }
     }
+    void remove(int val) {
+        if (!root) return;
+        if (root->data == val) { delete root; root = nullptr; return; }
+        queue<Node*> q; q.push(root);
+        Node *temp, *keyNode = nullptr;
+        while (!q.empty()) {
+            temp = q.front(); q.pop();
+            if (temp->data == val) keyNode = temp;
+            if (temp->left) q.push(temp->left);
+            if (temp->right) q.push(temp->right);
+        }
+        if (keyNode) {
+            keyNode->data = temp->data;
+            delete temp;
+        }
+    }
     void inorder(Node* n) { if(n){ inorder(n->left); cout << n->data << " "; inorder(n->right); } }
     void preorder(Node* n) { if(n){ cout << n->data << " "; preorder(n->left); preorder(n->right); } }
     void postorder(Node* n) { if(n){ postorder(n->left); postorder(n->right); cout << n->data << " "; } }
