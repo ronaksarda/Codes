@@ -1,31 +1,31 @@
 #include <iostream>
 #include <vector>
-
+#include<algorithm>
 using namespace std;
 
-struct BSTNode {
+struct Node {
     int data;
-    BSTNode *left, *right;
-    BSTNode(int val) : data(val), left(nullptr), right(nullptr) {}
+    Node *left, *right;
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
 };
 
 // BST Insertion
-BSTNode* insert(BSTNode* root, int val) {
-    if (!root) return new BSTNode(val);
+Node* insert(Node* root, int val) {
+    if (!root) return new Node(val);
     if (val < root->data) root->left = insert(root->left, val);
     else root->right = insert(root->right, val);
     return root;
 }
 
 // Helper to find minimum value node
-BSTNode* minValueNode(BSTNode* node) {
-    BSTNode* current = node;
+Node* minValueNode(Node* node) {
+    Node* current = node;
     while (current && current->left) current = current->left;
     return current;
 }
 
 // BST Deletion
-BSTNode* deleteNode(BSTNode* root, int key) {
+Node* deleteNode(Node* root, int key) {
     if (!root) return root;
 
     if (key < root->data) root->left = deleteNode(root->left, key);
@@ -33,16 +33,16 @@ BSTNode* deleteNode(BSTNode* root, int key) {
     else {
         // Node with only one child or no child
         if (!root->left) {
-            BSTNode* temp = root->right;
+            Node* temp = root->right;
             delete root;
             return temp;
         } else if (!root->right) {
-            BSTNode* temp = root->left;
+            Node* temp = root->left;
             delete root;
             return temp;
         }
         // Node with two children: Get inorder successor
-        BSTNode* temp = minValueNode(root->right);
+        Node* temp = minValueNode(root->right);
         root->data = temp->data;
         root->right = deleteNode(root->right, temp->data);
     }
@@ -50,11 +50,11 @@ BSTNode* deleteNode(BSTNode* root, int key) {
 }
 
 // Construct Balanced BST from Sorted Array
-BSTNode* sortedArrayToBST(int arr[], int start, int end) {
+Node* sortedArrayToBST(int arr[], int start, int end) {
     if (start > end) return nullptr;
     
     int mid = start + (end - start) / 2;
-    BSTNode* root = new BSTNode(arr[mid]);
+    Node* root = new Node(arr[mid]);
     
     root->left = sortedArrayToBST(arr, start, mid - 1);
     root->right = sortedArrayToBST(arr, mid + 1, end);
@@ -62,7 +62,7 @@ BSTNode* sortedArrayToBST(int arr[], int start, int end) {
     return root;
 }
 
-void inorder(BSTNode* root) {
+void inorder(Node* root) {
     if (!root) return;
     inorder(root->left);
     cout << root->data << " ";
@@ -70,7 +70,7 @@ void inorder(BSTNode* root) {
 }
 
 int main() {
-    BSTNode* root = nullptr;
+    Node* root = nullptr;
     
     // Part 1: Insertion and Deletion
     root = insert(root, 50);
@@ -82,13 +82,13 @@ int main() {
     cout << "BST Inorder after insertion: ";
     inorder(root);
     
-    root = deleteNode(root, 30);
+    root = deleteNode(root, 30);    
     cout << "\nBST Inorder after deleting 30: ";
     inorder(root);
 
     // Part 2: Balanced BST from Sorted Array
     int sortedArr[] = {1, 2, 3, 4, 5, 6, 7};
-    BSTNode* balancedRoot = sortedArrayToBST(sortedArr, 0, 6);
+    Node* balancedRoot = sortedArrayToBST(sortedArr, 0, 6);
     
     cout << "\nBalanced BST Inorder: ";
     inorder(balancedRoot);

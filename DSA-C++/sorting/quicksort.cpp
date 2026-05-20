@@ -3,7 +3,7 @@ using namespace std;
 
 //Quick sort implementation with last element as pivot
 
-int partition(int arr[], int low, int high) {
+int partition(int arr[], int low, int high) { //for random pivot , int random = rand() % (high - low + 1) + low; swap(arr[random], arr[high]);
     int pivot = arr[high];
     int i = low - 1;
 

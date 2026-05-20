@@ -11,29 +11,29 @@ class MaxHeap {
         while (i > 0 && heap[(i - 1) / 2] < heap[i]) {
             swap(heap[i], heap[(i - 1) / 2]);
             i = (i - 1) / 2;
-        }
+        }//moving up the heap until the max-heap property is restored
     }
 
     void heapifyDown(int i) {
         int largest = i;
-        int left = 2 * i + 1;
-        int right = 2 * i + 2;
+        int left = 2 * i + 1; //left property
+        int right = 2 * i + 2;//right property
 
         if (left < heap.size() && heap[left] > heap[largest]) 
-            largest = left;
+            largest = left; //left > root 
         if (right < heap.size() && heap[right] > heap[largest]) 
-            largest = right;
+            largest = right; //right > largest 
 
         if (largest != i) {
             swap(heap[i], heap[largest]);
-            heapifyDown(largest);
+            heapifyDown(largest); //heapify
         }
     }
 
 public:
     void insert(int val) {
         heap.push_back(val);
-        heapifyUp(heap.size() - 1);
+        heapifyUp(heap.size() - 1); //vector implementation of heap, new element is added at the end and then heapified up
     }
 
     void removeMax() {

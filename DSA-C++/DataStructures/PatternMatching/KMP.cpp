@@ -29,6 +29,10 @@ void KMP(string text, string pat) {
             if (j != 0) j = lps[j - 1];
             else i++;
         }
+        else{
+            cout << "Pattern not found\n";
+            break;
+        }
     }
 }
 
