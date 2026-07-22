@@ -27,5 +27,12 @@ void boyerMoore(string text, string pat) {
 
 int main() {
     boyerMoore("ABABDABACDABABCABAB", "ABABCABAB");
+    string text = "ABABDABACDABABCABAB";
+    string pat = "ABABCABAB";
+    if (text.find(pat) != string::npos) {
+        cout << "Pattern found\n";
+    } else {
+        cout << "Pattern not found\n";
+    }
     return 0;
 }

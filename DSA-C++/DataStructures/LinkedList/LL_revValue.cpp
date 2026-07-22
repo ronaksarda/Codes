@@ -59,8 +59,6 @@ public:
             cout << "Value not found in the list" << endl;
             return;
         }
-
-        //Reversing
         Node* prev = nullptr;
         Node* curr = head;
         Node* next = nullptr;

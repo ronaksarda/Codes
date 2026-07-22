@@ -1,5 +1,7 @@
     
 #include<iostream>
+#include<algorithm>
+#include<vector>
 using namespace std;
 
 void insertionsort(int arr[],int n){

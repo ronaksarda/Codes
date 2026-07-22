@@ -7,7 +7,7 @@ struct Node{
     Node* next;
 };
 
-class LinkedList{
+class LinkedList {
     private: 
         Node* head;
     public:
